@@ -38,7 +38,8 @@ class App extends React.Component{
         
         this.state = {
             field: field,
-            isEnd: false
+            isEnd: false,
+            score: 0
         }
                         
         this.timerID = setInterval(() => this.snakeMove(), 250);
@@ -50,6 +51,7 @@ class App extends React.Component{
                 <Field field={this.state.field} 
                     width = {this.props.width} 
                     height = {this.props.height} 
+                    score = {this.state.score}
                     directLeft = {(e) => this.directLeft(e)} 
                     directRight = {(e) => this.directRight(e)} />
         );
@@ -62,6 +64,7 @@ class App extends React.Component{
         var y = this.snake[0].y + this.dy;
         
         const field = this.state.field.slice();
+        var score = this.state.score;
         var eat = false;
         var isEnd = this.state.isEnd;
         
@@ -88,6 +91,7 @@ class App extends React.Component{
         if(field[y][x] == 2){//Сожрали
             eat = true;
             this.addEat(field);
+            score ++;
         }
                 
         if(field[y][x] == 1){//Сожрали сами себя
@@ -105,7 +109,7 @@ class App extends React.Component{
             field[tail.y][tail.x] = 0;            
         }
         
-        this.setState({field: field, isEnd: isEnd});
+        this.setState({field: field, isEnd: isEnd, score: score});
     }
     
     
@@ -174,6 +178,11 @@ class Field extends React.Component{
                         }.bind(this))
                 }               
                 </tbody>
+                <thead>
+                    <tr>
+                        <td colSpan={this.props.width}>Съедено: {this.props.score}</td>
+                    </tr>
+                </thead>
                 <tfoot>
                     <tr>
                         <td colSpan={this.props.width} className="centerCell">
