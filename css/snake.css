@@ -1,1 +1,30 @@
+@CHARSET "UTF-8";
 
+table{
+	background-image: url('../img/fon.png');
+	background-position: center;
+}
+
+td{
+	width: 15px;
+	height: 15px;
+	border: 1px solid black;
+	text-align: center;		
+}
+
+.snake{
+	background-color: green;
+	background-image: url('../img/telo.png');
+	background-position: center;
+}
+
+.head{
+	background-image: url('../img/golova.png');	
+	background-position: center;
+}
+
+.eat{
+	background-color: red;
+	background-image: url('../img/ob.png');
+	background-position: center;
+}
