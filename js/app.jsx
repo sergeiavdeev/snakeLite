@@ -45,6 +45,19 @@ class App extends React.Component{
         this.timerID = setInterval(() => this.snakeMove(), 250);
     }
     
+    
+    componentDidMount(){
+        
+        $(document.body).on('keydown', (e)=>this.onKeyPress(e));
+    }
+    
+    
+    componentWillUnMount(){
+        
+        $(document.body).off('keydown', this.onKeyPress);
+    }
+    
+    
     render(){
         
         return(
@@ -53,7 +66,8 @@ class App extends React.Component{
                     height = {this.props.height} 
                     score = {this.state.score}
                     directLeft = {(e) => this.directLeft(e)} 
-                    directRight = {(e) => this.directRight(e)} />
+                    directRight = {(e) => this.directRight(e)} 
+                  />
         );
     }  
     
@@ -141,6 +155,21 @@ class App extends React.Component{
     }
     
     
+    onKeyPress(e){
+        
+        switch(e.keyCode){
+            case 37:
+                this.directLeft();
+                break;
+            case 39:
+                this.directRight();
+                break;
+            default:
+                break;      
+        }
+    }
+    
+    
     addEat(field){
                         
         while(true){
@@ -166,6 +195,9 @@ class Field extends React.Component{
     }
     
     
+    
+    
+    
     render(){
         
         return(
@@ -186,7 +218,7 @@ class Field extends React.Component{
                 <tfoot>
                     <tr>
                         <td colSpan={this.props.width} className="centerCell">
-                            <button className="btn btn-default" onClick={(e) => this.props.directLeft(e)} autoFocus={true}>Влево</button>
+                            <button className="btn btn-default" onClick={(e) => this.props.directLeft(e)}>Влево</button>
                             <button className="btn btn-default" onClick={(e) => this.props.directRight(e)}>Вправо</button>
                         </td>
                     </tr>                            
