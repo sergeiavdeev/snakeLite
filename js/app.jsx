@@ -29,12 +29,11 @@ class App extends React.Component{
             else{
                 field[y][x] = 1;
             }
+        }       
+        
+        for(var i = 0; i < 5; i++){
+            this.addEat(field);
         }
-       
-        this.addEat(field);
-        this.addEat(field);
-        this.addEat(field);
-        this.addEat(field);        
         
         this.state = {
             field: field,
@@ -48,7 +47,7 @@ class App extends React.Component{
     
     componentDidMount(){
         
-        $(document.body).on('keydown', (e)=>this.onKeyPress(e));
+        $(document.body).on('keydown', (e) => this.onKeyPress(e));
     }
     
     
@@ -192,10 +191,7 @@ class Field extends React.Component{
     constructor(props){
         
         super(props);        
-    }
-    
-    
-    
+    }    
     
     
     render(){
@@ -234,6 +230,7 @@ class Field extends React.Component{
                 el.map(function(el, index){
                     
                     var className = "";
+                    
                     if(el == 1){
                         className = "snake";
                     }
